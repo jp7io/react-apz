@@ -10,6 +10,14 @@ export const contactsReducer = (state = initialState, action) => {
           ...state,
         contactList: state.contactList.concat(action.contact)
       };
+    case 'contact_delete':
+      return {
+          ...state,
+          contactList: [
+              ...state.contactList.slice(0, action.index),
+              ...state.contactList.slice(action.index + 1)
+          ]
+      };
     default:
       return state;
   }

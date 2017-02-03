@@ -10,3 +10,8 @@ export const contactAdd = contact => ({
   type: 'contact_add',
   contact
 });
+
+export const contactDelete = index => ({
+  type: 'contact_delete',
+  index
+});
