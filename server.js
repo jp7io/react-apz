@@ -2,17 +2,19 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { MongoClient, ObjectID } = require('mongodb');
 
-try {
-  const env = require('dotenv');
-
-  env.config({ silent: true });
-}
-catch(e) {
-  // Do nothing - if dotenv is not installed then we probably don't need it
-}
-
 let app = express();
 app.use(bodyParser.json());
+
+try {
+  const env = require('dotenv');
+  const cors = require('cors');
+
+  env.config({ silent: true });
+  app.use(cors());
+}
+catch(e) {
+  // Do nothing - if dotenv and cors are not installed then we probably don't need them
+}
 
 var db; // We will declare the database connection variable outside of the callback so that the server gets global access to it
 const COLLECTION = "contacts";

@@ -12,7 +12,6 @@ class ContactCreate extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
         <form className="form-horizontal">
           <ContactForm {...this.props} />
