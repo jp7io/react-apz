@@ -9,7 +9,7 @@ export const contactFormUpdate = ({ prop, value }) => ({
 });
 
 export const contactAdd = contact => dispatch => {
-  fetch('http://localhost:8080/contacts', {
+  fetch(`${process.env.REACT_APP_URL}/contacts`, {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
@@ -27,7 +27,7 @@ export const contactAdd = contact => dispatch => {
 };
 
 export const contactDelete = id => dispatch => {
-  fetch(`http://localhost:8080/contacts/${id}`, {
+  fetch(`${process.env.REACT_APP_URL}/contacts/${id}`, {
     method: "DELETE"
   })
       .then(() => {
@@ -40,7 +40,7 @@ export const contactDelete = id => dispatch => {
 };
 
 export const contactEdit = contact => dispatch => {
-  fetch(`http://localhost:8080/contacts/${contact.id}`, {
+  fetch(`${process.env.REACT_APP_URL}/contacts/${contact.id}`, {
     method: "PUT",
     headers: {
       'Content-Type': 'application/json'
@@ -57,7 +57,7 @@ export const contactEdit = contact => dispatch => {
 };
 
 export const contactFetch = () => dispatch => {
-  fetch('http://localhost:8080/contacts')
+  fetch(`${process.env.REACT_APP_URL}/contacts`)
       .then(response => response.json())
       .then(json =>
         dispatch({

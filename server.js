@@ -1,9 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 const { MongoClient, ObjectID } = require('mongodb');
 
 let app = express();
 app.use(bodyParser.json());
+app.use(express.static(path.resolve(__dirname, 'build')));
 
 try {
   const env = require('dotenv');
@@ -35,8 +37,8 @@ MongoClient.connect(process.env.MONGODB_URI, (error, database) => {
   });
 });
 
-app.get('/', (req, res) => {
-  res.status(200).json({ message: 'Hello World!' });
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
 });
 
 app.get('/contacts', (req, res) => {
