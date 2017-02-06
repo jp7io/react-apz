@@ -69,7 +69,7 @@ app.post('/contacts', (req, res) => {
 
   db.collection(COLLECTION).insertOne(body, (error, doc) => {
     if (error) {
-      handleError(response, error.message, 'Failed to create contact');
+      handleError(res, error.message, 'Failed to create contact');
     } else {
       res.status(201).json(doc.ops[0]);
     }
