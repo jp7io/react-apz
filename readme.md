@@ -3,6 +3,6 @@
 
 This is the source code of the final app designed along this guide.
 
-[Get started right now.](/ultimagriever/react-apz/wiki/Create-React-App)
+[Get started right now.](https://github.com/ultimagriever/react-apz/wiki/Create-React-App)
 
 [Working example deployed to Heroku](https://quiet-badlands-18267.herokuapp.com/)
