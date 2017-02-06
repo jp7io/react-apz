@@ -37,10 +37,6 @@ MongoClient.connect(process.env.MONGODB_URI, (error, database) => {
   });
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-});
-
 app.get('/contacts', (req, res) => {
   db.collection(COLLECTION).find({}).toArray((error, docs) => {
     if (error) {
@@ -102,6 +98,10 @@ app.delete('/contacts/:id', (req, res) => {
       res.status(204).end();
     }
   })
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
 });
 
 const handleError = (res, reason, message, code) => {
