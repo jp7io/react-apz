@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Match from 'react-router/Match';
 import logo from './logo.svg';
 import ContactList from './containers/ContactList';
-import ContactForm from './containers/ContactForm';
+import ContactCreate from './containers/ContactCreate';
+import ContactEdit from './containers/ContactEdit';
 import './App.css';
 
 class App extends Component {
@@ -12,7 +13,8 @@ class App extends Component {
         <h2>Contacts Manager</h2>
         <div className="container">
           <Match exactly pattern="/" component={ContactList} />
-          <Match pattern="/new" component={ContactForm} />
+          <Match pattern="/new" component={ContactCreate} />
+          <Match pattern="/edit/:contactId" component={ContactEdit} />
         </div>
       </div>
     );

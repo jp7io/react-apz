@@ -18,6 +18,16 @@ export const contactsReducer = (state = initialState, action) => {
               ...state.contactList.slice(action.index + 1)
           ]
       };
+    case 'contact_edit':
+      const index = state.contactList.findIndex(c => c.id === action.contact.id);
+      return {
+          ...state,
+          contactList: [
+              ...state.contactList.slice(0, index),
+              action.contact,
+              ...state.contactList.slice(index + 1)
+          ]
+      };
     default:
       return state;
   }

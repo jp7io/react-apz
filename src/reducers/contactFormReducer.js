@@ -1,4 +1,5 @@
 const initialState = {
+  id: '',
   name: '',
   phone: '',
   email: ''
@@ -12,6 +13,7 @@ export const contactFormReducer = (state = initialState, action) => {
           [action.payload.prop]: action.payload.value
       };
     case 'contact_add':
+    case 'contact_edit':
       return {
           ...state,
           ...initialState

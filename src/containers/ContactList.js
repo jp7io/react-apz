@@ -14,8 +14,8 @@ class ContactList extends Component {
           </Link>
           <ul>
             {
-              this.props.contactList.map(({ name, phone, email }, index) => (
-                  <li>{name} - {phone} - {email} - <Button buttonType="btn-danger" onClick={() => this.props.onClickDelete(index)}>Delete</Button></li>
+              this.props.contactList.map(({ id, name, phone, email }, index) => (
+                  <li key={index}>{name} - {phone} - {email} - <Link to={`/edit/${id}`} className="btn btn-primary">Edit</Link> - <Button buttonType="btn-danger" onClick={() => this.props.onClickDelete(index)}>Delete</Button></li>
               ))
             }
           </ul>
