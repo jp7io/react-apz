@@ -7,7 +7,7 @@ export const contactFormUpdate = ({ prop, value }) => ({
 });
 
 export const contactFetch = () => dispatch => {
-  fetch(`${process.env.REACT_APP_URL}/contacts`)
+  fetch(`/contacts`)
       .then(response => response.json())
       .then(json =>
           dispatch({
@@ -17,7 +17,7 @@ export const contactFetch = () => dispatch => {
 };
 
 export const contactFetchById = id => dispatch => {
-  fetch(`${process.env.REACT_APP_URL}/contacts/${id}`)
+  fetch(`/contacts/${id}`)
     .then(response => response.json())
     .then(json => {
       for (let key in json) {
@@ -27,7 +27,7 @@ export const contactFetchById = id => dispatch => {
 };
 
 export const contactAdd = contact => dispatch => {
-  fetch(`${process.env.REACT_APP_URL}/contacts`, {
+  fetch(`/contacts`, {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ export const contactAdd = contact => dispatch => {
 };
 
 export const contactEdit = contact => dispatch => {
-  fetch(`${process.env.REACT_APP_URL}/contacts/${contact.id}`, {
+  fetch(`/contacts/${contact.id}`, {
     method: "PUT",
     headers: {
       'Content-Type': 'application/json'
@@ -62,7 +62,7 @@ export const contactEdit = contact => dispatch => {
 };
 
 export const contactDelete = id => dispatch => {
-  fetch(`${process.env.REACT_APP_URL}/contacts/${id}`, {
+  fetch(`/contacts/${id}`, {
     method: "DELETE"
   })
       .then(() => {

@@ -9,10 +9,8 @@ app.use(express.static(path.resolve(__dirname, 'build')));
 
 try {
   const env = require('dotenv');
-  const cors = require('cors');
 
   env.config({ silent: true });
-  app.use(cors());
 }
 catch(e) {
   // Do nothing - if dotenv and cors are not installed then we probably don't need them
