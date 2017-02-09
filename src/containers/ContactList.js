@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Link from 'react-router/Link';
+import { Link, withRouter } from 'react-router-dom';
 import Button from '../components/Button';
 import { contactDelete, contactFetch } from '../actions';
 
@@ -37,4 +37,4 @@ const mapDispatchToProps = dispatch => ({
   onLoad: () => dispatch(contactFetch())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ContactList));
