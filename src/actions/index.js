@@ -1,12 +1,30 @@
-import uuid from 'uuid';
-
 export const contactFormUpdate = ({ prop, value }) => ({
-  type: 'contact_form_update',
+  type: 'CONTACT_FORM_UPDATE',
   payload: {
     prop,
     value
   }
 });
+
+export const contactFetch = () => dispatch => {
+  fetch(`${process.env.REACT_APP_URL}/contacts`)
+      .then(response => response.json())
+      .then(json =>
+          dispatch({
+            type: 'CONTACT_FETCH',
+            contacts: json
+          }));
+};
+
+export const contactFetchById = id => dispatch => {
+  fetch(`${process.env.REACT_APP_URL}/contacts/${id}`)
+    .then(response => response.json())
+    .then(json => {
+      for (let key in json) {
+        dispatch(contactFormUpdate({ prop: key, value: json[key] }));
+      }
+    });
+};
 
 export const contactAdd = contact => dispatch => {
   fetch(`${process.env.REACT_APP_URL}/contacts`, {
@@ -19,21 +37,8 @@ export const contactAdd = contact => dispatch => {
       .then(response => response.json())
       .then(() => {
         dispatch({
-          type: 'contact_add',
+          type: 'CONTACT_ADD',
           contact
-        });
-        dispatch(contactFetch());
-      });
-};
-
-export const contactDelete = id => dispatch => {
-  fetch(`${process.env.REACT_APP_URL}/contacts/${id}`, {
-    method: "DELETE"
-  })
-      .then(() => {
-        dispatch({
-          type: 'contact_delete',
-          id
         });
         dispatch(contactFetch());
       });
@@ -49,19 +54,22 @@ export const contactEdit = contact => dispatch => {
   })
       .then(() => {
         dispatch({
-          type: 'contact_edit',
+          type: 'CONTACT_EDIT',
           contact
         });
         dispatch(contactFetch());
       });
 };
 
-export const contactFetch = () => dispatch => {
-  fetch(`${process.env.REACT_APP_URL}/contacts`)
-      .then(response => response.json())
-      .then(json =>
+export const contactDelete = id => dispatch => {
+  fetch(`${process.env.REACT_APP_URL}/contacts/${id}`, {
+    method: "DELETE"
+  })
+      .then(() => {
         dispatch({
-          type: 'contact_fetch',
-          contacts: json
-        }));
+          type: 'CONTACT_DELETE',
+          id
+        });
+        dispatch(contactFetch());
+      });
 };

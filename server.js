@@ -58,6 +58,21 @@ app.get('/contacts', (req, res) => {
   })
 });
 
+app.get('/contacts/:id', (req, res) => {
+  db.collection(COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, (error, doc) => {
+    if (error) {
+      handleError(res, error.message, 'Failed to fetch countdown', 404);
+    } else {
+      res.status(200).json({
+        id: doc._id,
+        name: doc.name,
+        phone: doc.phone,
+        email: doc.email
+      });
+    }
+  })
+});
+
 app.post('/contacts', (req, res) => {
   const { body }  = req;
 

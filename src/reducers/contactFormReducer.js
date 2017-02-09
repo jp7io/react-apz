@@ -7,13 +7,13 @@ const initialState = {
 
 export const contactFormReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'contact_form_update':
+    case 'CONTACT_FORM_UPDATE':
       return {
           ...state,
           [action.payload.prop]: action.payload.value
       };
-    case 'contact_add':
-    case 'contact_edit':
+    case 'CONTACT_ADD':
+    case 'CONTACT_EDIT':
       return {
           ...state,
           ...initialState
