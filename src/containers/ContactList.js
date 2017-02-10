@@ -11,19 +11,40 @@ class ContactList extends Component {
 
   render() {
     return (
-        <div>
-          <h1>Contacts</h1>
-          <Link to="/new">
-            Create new Contact
-          </Link>
-          <ul>
+      <div>
+        <Link to="/new" className="btn btn-primary">
+          Create Contact
+        </Link>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th colSpan={2}></th>
+            </tr>
+          </thead>
+          <tbody>
             {
               this.props.contactList.map(({ id, name, phone, email }, index) => (
-                  <li key={index}>{name} - {phone} - {email} - <Link to={`/edit/${id}`} className="btn btn-primary">Edit</Link> - <Button buttonType="btn-danger" onClick={() => this.props.onClickDelete(id)}>Delete</Button></li>
+                <tr key={index}>
+                  <td>{name}</td>
+                  <td>{phone}</td>
+                  <td>{email}</td>
+                  <td><Link to={`/edit/${id}`} className="btn btn-primary">Edit</Link></td>
+                  <td>
+                    <Button
+                      buttonType="btn-danger"
+                      onClick={() => this.props.onClickDelete(id)}>
+                        Delete
+                    </Button>
+                  </td>
+                </tr>
               ))
             }
-          </ul>
-        </div>
+          </tbody>
+        </table>
+      </div>
     );
   }
 }

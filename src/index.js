@@ -10,8 +10,8 @@ import './index.css';
 const store = createStore(reducer, {}, applyMiddleware(ReduxThunk));
 
 ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    document.getElementById('root')
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
 );
