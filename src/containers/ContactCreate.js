@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Link from 'react-router/Link';
+import { Link, withRouter } from 'react-router-dom';
 import { contactFormUpdate, contactAdd } from '../actions';
 import ContactForm from '../components/ContactForm';
 
@@ -32,4 +32,4 @@ const mapDispatchToProps = dispatch => ({
   onSubmit: contact => dispatch(contactAdd(contact))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactCreate);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ContactCreate));

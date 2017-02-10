@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Link from 'react-router/Link';
+import { Link, withRouter } from 'react-router-dom';
 import { contactFormUpdate, contactEdit, contactFetchById } from '../actions';
 import ContactForm from '../components/ContactForm';
 
 class ContactEdit extends Component {
   componentWillMount() {
-    const { contactId } = this.props.params;
+    const { contactId } = this.props.match.params;
+
+    console.log(this.props.match);
 
     this.props.onLoad(contactId);
   }
@@ -39,4 +41,4 @@ const mapDispatchToProps = dispatch => ({
   onSubmit: contact => dispatch(contactEdit(contact))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactEdit);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ContactEdit));
