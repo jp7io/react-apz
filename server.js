@@ -74,10 +74,9 @@ app.get('/contacts/:id', (req, res) => {
 app.post('/contacts', (req, res) => {
   const { body }  = req;
 
-  console.log(body);
-
   if (!(body.name || body.email)) {
     handleError(res, "Invalid user input", "Must provide name and e-mail at least.", 400);
+    return;
   }
 
   db.collection(COLLECTION).insertOne(body, (error, doc) => {
