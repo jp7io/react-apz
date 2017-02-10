@@ -1,11 +1,16 @@
-# React.js APZ
-## The complete guide to building a React.js app from a to z.
+# React Apz
+
+#### The guide to build a React app from a to z.
 
 This is the source code of the final app designed along this guide.
 
-[Get started right now.](https://github.com/ultimagriever/react-apz/wiki/Create-React-App)
+#### Step-by-Step Tutorial (Start Here!)
 
-[Working example deployed to Heroku](https://react-apz.herokuapp.com/)
+https://github.com/jp7internet/react-apz/wiki
+
+####  Live Demo
+
+https://react-apz.herokuapp.com
 
 #### Includes
 
