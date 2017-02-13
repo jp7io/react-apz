@@ -6,7 +6,9 @@ import { contactDelete, contactFetch } from '../actions';
 
 class ContactList extends Component {
   componentWillMount() {
-    this.props.onLoad();
+    if (!this.props.contactList.length) {
+      this.props.onLoad();
+    }
   }
 
   render() {
