@@ -8,8 +8,6 @@ class ContactEdit extends Component {
   componentWillMount() {
     const { contactId } = this.props.match.params;
 
-    console.log(this.props.match);
-
     this.props.onLoad(contactId);
   }
 

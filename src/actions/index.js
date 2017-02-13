@@ -20,9 +20,9 @@ export const contactFetchById = id => dispatch => {
   fetch(`/contacts/${id}`)
     .then(response => response.json())
     .then(json => {
-      for (let key in json) {
-        dispatch(contactFormUpdate({ prop: key, value: json[key] }));
-      }
+      Object.keys(json).forEach(key =>
+        dispatch(contactFormUpdate({ prop: key, value: json[key] }))
+      );
     });
 };
 
