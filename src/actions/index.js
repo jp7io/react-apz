@@ -1,11 +1,3 @@
-export const contactFormUpdate = ({ prop, value }) => ({
-  type: 'CONTACT_FORM_UPDATE',
-  payload: {
-    prop,
-    value
-  }
-});
-
 export const contactFetch = () => dispatch => {
   fetch(`/contacts`)
     .then(response => response.json())
@@ -14,16 +6,6 @@ export const contactFetch = () => dispatch => {
           type: 'CONTACT_FETCH',
           contacts: json
         }));
-};
-
-export const contactFetchById = id => dispatch => {
-  fetch(`/contacts/${id}`)
-    .then(response => response.json())
-    .then(json => {
-      Object.keys(json).forEach(key =>
-        dispatch(contactFormUpdate({ prop: key, value: json[key] }))
-      );
-    });
 };
 
 export const contactAdd = contact => dispatch => {

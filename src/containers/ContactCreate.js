@@ -1,35 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
-import { contactFormUpdate, contactAdd } from '../actions';
+import { withRouter } from 'react-router-dom';
+import { contactAdd } from '../actions';
 import ContactForm from '../components/ContactForm';
 
 class ContactCreate extends Component {
-  handleSubmit() {
-    const { name, phone, email } = this.props;
-
+  handleSubmit(values) {
+    const { name, phone, email } = values;
     this.props.onSubmit({ name, phone, email });
+    this.props.push("/");
   }
 
   render() {
     return (
-        <form className="form-horizontal">
-          <ContactForm {...this.props} />
-          <fieldset className="form-group">
-            <Link to="/" className="btn btn-primary" onClick={() => this.handleSubmit()}>Submit</Link>
-          </fieldset>
-        </form>
+        <ContactForm onSubmit={this.handleSubmit.bind(this)} />
     );
   }
 }
 
-const mapStateToProps = state => ({
-    ...state.contactForm
-});
-
 const mapDispatchToProps = dispatch => ({
-  onChange: values => dispatch(contactFormUpdate(values)),
   onSubmit: contact => dispatch(contactAdd(contact))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ContactCreate));
+export default connect(null, mapDispatchToProps)(withRouter(ContactCreate));

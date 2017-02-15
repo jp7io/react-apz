@@ -1,27 +1,36 @@
 import React, { Component } from 'react';
+import { Field, reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
 
-export default class ContactForm extends Component {
-  handleChange(event, prop) {
-    const { value } = event.target;
-    this.props.onChange({ prop, value });
-  }
-
+class ContactForm extends Component {
   render() {
+    const { handleSubmit, pristine, submitting, reset } = this.props;
     return (
-        <div>
+        <form className="form-horizontal" onSubmit={handleSubmit}>
+          <Field name="id" type="hidden" component="input" />
           <fieldset className="form-group">
             <label htmlFor="name">Name</label>
-            <input type="text" id="name" className="form-control" value={this.props.name} onChange={event => this.handleChange(event, 'name')} placeholder="e.g. John Doe"  />
+            <Field name="name" component="input" type="text" placeholder="e.g. John Doe" props={{ className: 'form-control' }} />
           </fieldset>
           <fieldset className="form-group">
             <label htmlFor="phone">Phone</label>
-            <input type="text" id="phone" className="form-control" value={this.props.phone} onChange={event => this.handleChange(event, 'phone')} placeholder="(111) 111-111"  />
+            <Field name="phone" component="input" type="text" placeholder="(111) 111-1111" props={{ className: 'form-control' }} />
           </fieldset>
           <fieldset className="form-group">
             <label htmlFor="email">E-mail</label>
-            <input type="email" id="email" className="form-control" value={this.props.email} onChange={event => this.handleChange(event, 'email')} placeholder="john.doe@example.com"  />
+            <Field name="email" component="input" type="email" placeholder="john.doe@example.com" props={{ className: 'form-control' }} />
           </fieldset>
-        </div>
+          <fieldset className="form-group">
+            <button type="submit" disabled={pristine || submitting} className="btn btn-primary">Submit</button>&nbsp;
+            <button type="button" disabled={pristine || submitting} className="btn btn-default" onClick={reset}>Reset</button>&nbsp;
+            <Link to="/"><i className="glyphicon glyphicon-chevron-left"></i> Back to Home Page</Link>
+          </fieldset>
+        </form>
     );
   }
 }
+
+export default reduxForm({
+  form: 'contact',
+  enableReinitialize: true
+})(ContactForm);
