@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { contactEdit } from '../actions';
-import ContactForm from '../components/ContactForm';
+import ContactForm from './ContactForm';
 
 class ContactEdit extends Component {
   state = {

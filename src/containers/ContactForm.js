@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
-import TextInput from './TextInput';
+import TextInput from '../components/TextInput';
 
 class ContactForm extends Component {
   required(value) {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { contactAdd } from '../actions';
-import ContactForm from '../components/ContactForm';
+import ContactForm from './ContactForm';
 
 class ContactCreate extends Component {
   handleSubmit(values) {
