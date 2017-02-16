@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const { MongoClient, ObjectID } = require('mongodb');
+const atob = require('atob');
 
 let app = express();
 app.use(bodyParser.json());
@@ -36,7 +37,24 @@ MongoClient.connect(process.env.MONGODB_URI, (error, database) => {
 });
 
 app.get('/contacts', (req, res) => {
-  db.collection(COLLECTION).find({}).toArray((error, docs) => {
+  const { query } = req;
+  let filters = {};
+
+  if (Object.keys(query).length > 0) {
+    filters = {
+      phone: atob(query.phone)
+    };
+
+    if (query.id !== 'undefined' && query.id.length > 0) {
+      Object.assign(filters, {
+        _id: {
+          '$ne': new ObjectID(query.id)
+        }
+      });
+    }
+  }
+
+  db.collection(COLLECTION).find(filters).toArray((error, docs) => {
     if (error) {
       handleError(res, error.message, "Failed to fetch contacts"); // If this fails, return an Error 500 - Internal Server Error
     } else {
