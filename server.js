@@ -77,7 +77,7 @@ app.get('/contacts', (req, res) => {
 app.get('/contacts/:id', (req, res) => {
   db.collection(COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, (error, doc) => {
     if (error) {
-      handleError(res, error.message, 'Failed to fetch countdown', 404);
+      handleError(res, error.message, 'Failed to fetch contact', 404);
     } else {
       res.status(200).json({
         id: doc._id,
@@ -123,7 +123,7 @@ app.put('/contacts/:id', (req, res) => {
 app.delete('/contacts/:id', (req, res) => {
   db.collection(COLLECTION).deleteOne({ _id: new ObjectID(req.params.id) }, (error, result) => {
     if (error) {
-      handleError(res, error.message, "Failed to delete countdown");
+      handleError(res, error.message, "Failed to delete contact");
     } else {
       res.status(204).end();
     }
