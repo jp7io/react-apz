@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { reduxForm, Field } from 'redux-form';
-import TextInput from '../components/TextInput';
+import TextInput from '../../components/TextInput';
 
 class ContactForm extends Component {
   required(value) {
@@ -17,7 +17,7 @@ class ContactForm extends Component {
   }
 
   render() {
-    const { handleSubmit, pristine, submitting, reset } = this.props;
+    const { handleSubmit, pristine, submitting, reset, parentPath } = this.props;
     return (
       <form className="form-horizontal" onSubmit={handleSubmit}>
         <Field name="_id" type="hidden" component="input" />
@@ -58,7 +58,7 @@ class ContactForm extends Component {
         <fieldset className="form-group">
           <button type="submit" disabled={pristine || submitting} className="btn btn-primary">Submit</button>&nbsp;
           <button type="button" disabled={pristine || submitting} className="btn btn-default" onClick={reset}>Reset</button>&nbsp;
-          <Link to="/"><i className="glyphicon glyphicon-chevron-left"></i> Back to Home Page</Link>
+          <Link to={parentPath}><i className="glyphicon glyphicon-chevron-left"></i> Back to Home Page</Link>
         </fieldset>
       </form>
     )
@@ -67,7 +67,7 @@ class ContactForm extends Component {
 
 const phoneUnique = values => {
   const { phone, id } = values;
-  return fetch(`/contacts?phone=${btoa(phone)}&id=${id}`)
+  return fetch(`/api/contacts?phone=${btoa(phone)}&id=${id}`)
     .then(response => response.json())
     .then(json => {
       if (json.length > 0) {

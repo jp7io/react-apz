@@ -35,7 +35,7 @@ MongoClient.connect(process.env.MONGODB_URI, (error, database) => {
   });
 });
 
-app.get('/contacts', (req, res) => {
+app.get('/api/contacts', (req, res) => {
   const { query } = req;
   let filters = {};
 
@@ -62,7 +62,7 @@ app.get('/contacts', (req, res) => {
   })
 });
 
-app.get('/:collection', (req, res) => {
+app.get('/api/:collection', (req, res) => {
   const { collection } = req.params;
 
   db.collection(collection).find({}).toArray((error, docs) => {
@@ -74,7 +74,7 @@ app.get('/:collection', (req, res) => {
   });
 })
 
-app.get('/:collection/:id', (req, res) => {
+app.get('/api/:collection/:id', (req, res) => {
   const { collection, id } = req.params;
 
   db.collection(collection).findOne({ _id: new ObjectID(id) }, (error, doc) => {
@@ -91,7 +91,7 @@ app.get('/:collection/:id', (req, res) => {
   })
 });
 
-app.post('/:collection', (req, res) => {
+app.post('/api/:collection', (req, res) => {
   const { body }  = req;
   const { collection } = req.params;
 
@@ -104,7 +104,7 @@ app.post('/:collection', (req, res) => {
   })
 });
 
-app.put('/:collection/:id', (req, res) => {
+app.put('/api/:collection/:id', (req, res) => {
   let { body } = req;
   const { collection, id } = req.params;
 
@@ -119,7 +119,7 @@ app.put('/:collection/:id', (req, res) => {
   });
 });
 
-app.delete('/:collection/:id', (req, res) => {
+app.delete('/api/:collection/:id', (req, res) => {
   const { collection, id } = req.params;
   db.collection(collection).deleteOne({ _id: new ObjectID(id) }, (error, result) => {
     if (error) {

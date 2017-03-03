@@ -1,5 +1,5 @@
 export const standardFetch = (route, type) => dispatch => {
-  const key = route.substr(1);
+  const key = route.replace('/api/', '');
   fetch(route)
     .then(response => response.json())
     .then(json => {

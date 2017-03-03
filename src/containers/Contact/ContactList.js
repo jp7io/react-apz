@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import Button from '../components/Button';
-import { contactDelete, contactFetch } from '../actions';
+import Button from '../../components/Button';
+import { contactDelete, contactFetch } from '../../actions';
 
 class ContactList extends Component {
   componentWillMount() {
@@ -10,9 +10,19 @@ class ContactList extends Component {
   }
 
   render() {
+    const { path } = this.props.match;
     return (
       <div>
-        <Link to="/new" className="btn btn-primary">
+        <h2>Contact Manager</h2>
+        <Link
+          to={{
+            pathname: `${path}/new`,
+            state: {
+              parentPath: path
+            }
+          }}
+          className="btn btn-primary"
+        >
           Create Contact
         </Link>
         <table className="table">
@@ -31,7 +41,19 @@ class ContactList extends Component {
                   <td>{name}</td>
                   <td>{phone}</td>
                   <td>{email}</td>
-                  <td><Link to={`/edit/${_id}`} className="btn btn-primary">Edit</Link></td>
+                  <td>
+                    <Link
+                      to={{
+                        pathname: `${path}/edit/${_id}`,
+                        state: {
+                          parentPath: path
+                        }
+                      }}
+                      className="btn btn-primary"
+                    >
+                      Edit
+                    </Link>
+                  </td>
                   <td>
                     <Button
                       buttonType="btn-danger"
