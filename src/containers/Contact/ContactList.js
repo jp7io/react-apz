@@ -11,6 +11,7 @@ class ContactList extends Component {
 
   render() {
     const { path } = this.props.match;
+    console.log(this.props.contactList);
     return (
       <div>
         <ListHeader path={path} headerText="Contact Manager" linkText="Create Contact"/>
@@ -18,9 +19,15 @@ class ContactList extends Component {
           cols={[
             'Name',
             'Phone',
-            'Email'
+            'Email',
+            'City'
           ]}
-          list={this.props.contactList}
+          list={
+            this.props.contactList.map(contact => ({
+              ...contact,
+              city: contact.city !== null ? `${contact.city.name}, ${contact.city.state}` : null
+            }))
+          }
           path={path}
           onClickDelete={this.props.onClickDelete}
         />

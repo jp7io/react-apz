@@ -2,9 +2,9 @@ import React from 'react';
 import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import ValidationMessage from './ValidationMessage';
 
-const TextInput = ({ input, label, type, placeholder, meta: { touched, error, warning } }) => (
+const SelectInput = ({ input, label, placeholder, options, meta: { touched, error, warning } }) => (
   <FormGroup
-    controlId={input.name}
+    controlId="state"
     validationState={
       touched ? (
         error ? 'error' : warning ? 'warning' : 'success'
@@ -12,10 +12,16 @@ const TextInput = ({ input, label, type, placeholder, meta: { touched, error, wa
     }
   >
     <ControlLabel>{label}</ControlLabel>
-    <FormControl {...input} placeholder={placeholder} type={type} />
-    <FormControl.Feedback />
+    <FormControl componentClass="select" placeholder={placeholder} {...input}>
+      <option value={null}>{placeholder}</option>
+      {
+        options.map(({ key, value }) => (
+          <option value={key} key={key}>{value}</option>
+        ))
+      }
+    </FormControl>
     <ValidationMessage touched={touched} error={error} warning={warning} />
   </FormGroup>
 );
 
-export default TextInput;
+export default SelectInput;

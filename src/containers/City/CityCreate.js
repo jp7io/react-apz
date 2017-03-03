@@ -7,7 +7,8 @@ import CityForm from './CityForm';
 class CityCreate extends Component {
   handleSubmit(values) {
     const { onSubmit, push, location } = this.props;
-    onSubmit(values);
+    const { name, state } = values;
+    onSubmit({ name, state });
     push(location.state.parentPath);
   }
 

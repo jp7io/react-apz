@@ -6,9 +6,9 @@ import ContactForm from './ContactForm';
 
 class ContactCreate extends Component {
   handleSubmit(values) {
-    const { name, phone, email } = values;
+    const { name, phone, email, city_id } = values;
     const { onSubmit, push, location } = this.props;
-    onSubmit({ name, phone, email });
+    onSubmit({ name, phone, email, city_id });
     push(location.state.parentPath);
   }
 

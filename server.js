@@ -57,7 +57,33 @@ app.get('/api/contacts', (req, res) => {
     if (error) {
       handleError(res, error.message, "Failed to fetch contacts"); // If this fails, return an Error 500 - Internal Server Error
     } else {
-      res.status(200).json(docs);
+      const contacts = [];
+      const promises = [];
+
+      docs.forEach(doc => {
+        let contact = Object.assign({}, doc);
+
+        delete contact.city_id;
+
+        promises.push(new Promise((resolve, reject) => {
+          db.collection('cities').findOne({ _id: new ObjectID(doc.city_id) }, (error, doc) => {
+            if (error) {
+              reject(error);
+            }
+            contact.city = doc;
+            contacts.push(contact);
+            resolve();
+          });
+        }));
+      });
+
+      Promise.all(promises)
+        .then(() => {
+          res.status(200).json(contacts);
+        })
+        .catch(error => {
+          handleError(res, error.message, 'Couldn\'t fetch city');
+        });
     }
   })
 });

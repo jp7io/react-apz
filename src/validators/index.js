@@ -5,8 +5,8 @@ export const maxLength = length => value => value && value.length <= length;
 export const phoneFormat = value => value && /^\+1 \([0-9]{3}\) [0-9]{3}-[0-9]{4}$/.test(value);
 
 export const phoneUnique = values => {
-  const { phone, id } = values;
-  return fetch(`/api/contacts?phone=${btoa(phone)}&id=${id}`)
+  const { phone, _id } = values;
+  return fetch(`/api/contacts?phone=${btoa(phone)}&id=${_id}`)
     .then(response => response.json())
     .then(json => {
       if (json.length > 0) {
