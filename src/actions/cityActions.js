@@ -7,8 +7,3 @@ export const cityAdd = city => standardAdd('/api/cities', 'city', 'CITY_ADD', ci
 export const cityEdit = city => standardEdit(`/api/cities/${city._id}`, 'city', 'CITY_EDIT', city);
 
 export const cityDelete = id => standardDelete(`/api/cities/${id}`, 'id', 'CITY_DELETE', id);
-
-export const cityFormUpdate = payload => ({
-  type: 'CITY_FORM_UPDATE',
-  payload
-});
