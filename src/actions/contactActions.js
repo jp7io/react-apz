@@ -1,4 +1,4 @@
-import { standardFetch, standardAdd, standardEdit, standardDelete } from './standardActions';
+import { standardFetch, standardAdd, standardEdit, standardDelete } from './standard/CrudActions';
 
 export const contactFetch = () => standardFetch('/api/contacts', 'CONTACT_FETCH');
 

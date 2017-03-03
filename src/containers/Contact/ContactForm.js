@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { reduxForm, Field } from 'redux-form';
+import { fieldRequired, maxLength, phoneFormat, phoneUnique } from '../../validators';
 import TextInput from '../../components/TextInput';
 
 class ContactForm extends Component {
   required(value) {
-    return value && value.length > 0 ? undefined : 'This field is required.';
+    return fieldRequired(value) ? undefined : 'This field is required.';
   }
 
   maxLength(max) {
-    return value => value && value.length <= max ? undefined : `Must have ${max} characters or less.`;
+    return value => maxLength(max)(value) ? undefined : `Must have ${max} characters or less.`;
   }
 
   phoneFormat(value) {
-    return value && /^\+1 \([0-9]{3}\) [0-9]{3}-[0-9]{4}$/.test(value) ? undefined : 'Must be in US format, e.g. +1 (111) 111-1111';
+    return phoneFormat(value) ? undefined : 'Must be in US format, e.g. +1 (111) 111-1111';
   }
 
   render() {
@@ -63,18 +64,6 @@ class ContactForm extends Component {
       </form>
     )
   }
-}
-
-const phoneUnique = values => {
-  const { phone, id } = values;
-  return fetch(`/api/contacts?phone=${btoa(phone)}&id=${id}`)
-    .then(response => response.json())
-    .then(json => {
-      if (json.length > 0) {
-        // eslint-disable-next-line
-        throw { phone: 'This phone number already exists.' };
-      }
-    });
 }
 
 export default reduxForm({

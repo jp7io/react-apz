@@ -81,12 +81,7 @@ app.get('/api/:collection/:id', (req, res) => {
     if (error) {
       handleError(res, error.message, 'Failed to fetch ' + collection, 404);
     } else {
-      res.status(200).json({
-        id: doc._id,
-        name: doc.name,
-        phone: doc.phone,
-        email: doc.email
-      });
+      res.status(200).json(doc);
     }
   })
 });
@@ -108,7 +103,7 @@ app.put('/api/:collection/:id', (req, res) => {
   let { body } = req;
   const { collection, id } = req.params;
 
-  delete body.id;
+  delete body._id;
 
   db.collection(collection).updateOne({ _id: new ObjectID(id) }, body, (error, doc) => {
     if (error) {

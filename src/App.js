@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import ContactList from './containers/Contact/ContactList';
-import ContactCreate from './containers/Contact/ContactCreate';
-import ContactEdit from './containers/Contact/ContactEdit';
+import { ContactList, ContactCreate, ContactEdit } from './containers/Contact';
+import { CityList, CityCreate, CityEdit } from './containers/City';
 import Home from './components/Home';
 import './App.css';
 
@@ -34,6 +33,10 @@ class App extends Component {
               <Route exact path="/contacts" component={ContactList} />
               <Route path="/contacts/new" component={ContactCreate} />
               <Route path="/contacts/edit/:contactId" component={ContactEdit} />
+
+              <Route exact path="/cities" component={CityList} />
+              <Route path="/cities/new" component={CityCreate} />
+              <Route path="/cities/edit/:cityId" component={CityEdit} />
             </div>
           </section>
         </div>
