@@ -3,7 +3,7 @@ const initialState = {
   loading: false
 };
 
-const findContactIndex = (state, id) => state.contactList.findIndex(c => c.id === id);
+const findContactIndex = (state, id) => state.contactList.findIndex(c => c._id === id);
 
 export const contactsReducer = (state = initialState, action) => {
   switch (action.type) {

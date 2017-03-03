@@ -20,7 +20,7 @@ class ContactForm extends Component {
     const { handleSubmit, pristine, submitting, reset } = this.props;
     return (
       <form className="form-horizontal" onSubmit={handleSubmit}>
-        <Field name="id" type="hidden" component="input" />
+        <Field name="_id" type="hidden" component="input" />
 
         <Field
           name="name"

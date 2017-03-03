@@ -26,16 +26,16 @@ class ContactList extends Component {
           </thead>
           <tbody>
             {
-              this.props.contactList.map(({ id, name, phone, email }, index) => (
+              this.props.contactList.map(({ _id, name, phone, email }, index) => (
                 <tr key={index}>
                   <td>{name}</td>
                   <td>{phone}</td>
                   <td>{email}</td>
-                  <td><Link to={`/edit/${id}`} className="btn btn-primary">Edit</Link></td>
+                  <td><Link to={`/edit/${_id}`} className="btn btn-primary">Edit</Link></td>
                   <td>
                     <Button
                       buttonType="btn-danger"
-                      onClick={() => this.props.onClickDelete(id)}>
+                      onClick={() => this.props.onClickDelete(_id)}>
                         Delete
                     </Button>
                   </td>
